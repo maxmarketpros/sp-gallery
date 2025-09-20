@@ -90,10 +90,12 @@ export default function ProjectsGallery({ projects }: ProjectsGalleryProps) {
 
   return (
     <>
-      <div className="grid grid-cols-1 gap-6 md:grid-cols-2 xl:grid-cols-3">
-        {projects.map((project, index) => (
-          <ProjectCard key={project.slug} project={project} onClick={() => openProject(index)} />
-        ))}
+      <div className="mx-auto w-full max-w-[1400px] px-4 sm:px-6 lg:px-8">
+        <div className="grid grid-cols-1 gap-8 lg:grid-cols-2 xl:grid-cols-3">
+          {projects.map((project, index) => (
+            <ProjectCard key={project.slug} project={project} onClick={() => openProject(index)} />
+          ))}
+        </div>
       </div>
       <Lightbox
         project={activeProject}
