@@ -16,8 +16,18 @@ const RESIZE_SCRIPT = `
 
   const MESSAGE_TYPE = "sp-gallery:height";
 
+  const getHeight = () => {
+    const doc = document.documentElement;
+    const body = document.body;
+    return Math.max(
+      doc ? doc.scrollHeight : 0,
+      body ? body.scrollHeight : 0,
+      window.innerHeight || 0
+    );
+  };
+
   const postHeight = () => {
-    const height = document.documentElement.scrollHeight;
+    const height = getHeight();
     window.parent.postMessage({ type: MESSAGE_TYPE, height }, "*");
   };
 

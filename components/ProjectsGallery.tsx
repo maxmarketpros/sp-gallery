@@ -1,6 +1,6 @@
 "use client";
 
-import { useCallback, useMemo, useState } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import type { Project } from "@/lib/projects";
 import Lightbox from "./Lightbox";
 import ProjectCard from "./ProjectCard";
@@ -20,6 +20,29 @@ export default function ProjectsGallery({ projects }: ProjectsGalleryProps) {
 
     return projects[activeProjectIndex] ?? null;
   }, [activeProjectIndex, projects]);
+
+  useEffect(() => {
+    if (typeof window === "undefined") {
+      return;
+    }
+
+    if (activeProjectIndex === null) {
+      if (window.parent && window.parent !== window) {
+        window.parent.postMessage({ type: "sp-gallery:lightbox-close" }, "*");
+      }
+      return;
+    }
+
+    try {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    } catch {
+      window.scrollTo(0, 0);
+    }
+
+    if (window.parent && window.parent !== window) {
+      window.parent.postMessage({ type: "sp-gallery:lightbox-open" }, "*");
+    }
+  }, [activeProjectIndex]);
 
   const openProject = useCallback((index: number) => {
     setActiveProjectIndex(index);
