@@ -6,7 +6,9 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "prebuild": "node scripts/generate-projects.mjs",
+    "generate:projects": "node scripts/generate-projects.mjs"
   },
   "dependencies": {
     "next": "14.2.4",

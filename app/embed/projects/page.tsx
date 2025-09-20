@@ -1,8 +1,6 @@
 import ProjectsGallery from "@/components/ProjectsGallery";
 import { getProjects } from "@/lib/projects";
 
-export const dynamic = "force-dynamic";
-
 type SearchParams = Record<string, string | string[] | undefined>;
 
 type EmbedProjectsPageProps = {
